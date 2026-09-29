@@ -1,0 +1,134 @@
+{
+  "datasetCommonParams": {
+    "dataset_root_dir": "AffectiveComputing/CyIN_datasets/processed_data_imagebind/",
+    "iemocap6": {
+      "unaligned": {
+        "feature_path": "IEMOCAP6_raw_vary_length_allcontext.pkl",
+        "video_path": "IEMOCAP_lmdb",
+        "annotate_path": "IEMOCAP6_annotate.json",
+        "seq_lens": [50, 69, 138],
+        "feature_dims": [768, 1024, 1024],
+        "train_samples": 5228,
+        "num_classes": 6,
+        "num_speakers": 2,
+        "language": "en",
+        "KeyEval": "WeightedF1"
+      }
+    },
+    "meld": {
+      "unaligned": {
+        "feature_path": "MELD_raw_vary_length_allcontext.pkl",
+        "video_path": "MELD_lmdb",
+        "annotate_path": "MELD_annotate.json",
+        "seq_lens": [50, 83, 249],
+        "feature_dims": [768, 1024, 1024],
+        "train_samples": 6491,
+        "num_classes": 7,
+        "num_speakers": 7,
+        "language": "en",
+        "KeyEval": "WeightedF1"
+      }
+    }
+  },
+  "cyin": {
+    "commonParams": {
+      "need_data_aligned": false,
+      "need_model_aligned": false,
+      "need_normalized": false,
+      "grad_accum_epoch": 1,
+      "stage_divide": 0.2,
+      
+      "miss_protocol": "random",
+      "fix": {
+        "modal_type": [0,1,2]
+      },
+      "random":{
+        "miss_rate": 0.7,
+        "miss_prob": false
+      },
+
+      "max_text_length": 512,
+      "transformers": "sbert",
+      "pretrained": "paraphrase-distilroberta-base-v1",
+      
+      "generation_stage": false,
+      "score_model_name": "ncsnv2_48",
+      "score_scale_by_sigma": true,
+      "score_num_scales": 10,
+      "score_sigma_l_max": 1.0,
+      "score_sigma_l_min": 0.01,
+      "score_sigma_a_max": 1.0,
+      "score_sigma_a_min": 0.01,
+      "score_sigma_v_max": 1.0,
+      "score_sigma_v_min": 0.01,
+      "score_normalization": "InstanceNorm++",
+      "score_nonlinearity": "elu",
+      "score_nf": 64,
+      "score_num_attn_head": 4,
+
+      "sde": "vesde",
+      "sampling_method": "pc",
+      "sampling_predictor": "none",
+      "sampling_corrector": "ald",
+      "sampling_n_steps_each": 5,
+      "sampling_noise_removal": true,
+      "sampling_probability_flow": false,
+      "sampling_snr": 0.128,
+      
+      "conv1d_kernel_size": 3,
+      "padding": 0,
+      "attn_mask": true
+    },
+    "debugParams": {
+      "d_paras": [
+        "max_epoch",
+        "batch_size",
+        "lr",
+        "lr_lm",
+        "weight_decay",
+        "grad_clip",
+        "common_dim",
+        "IB_inter_dim",
+        "IB_btnk_dim",
+        "p_eta",
+        "RAE_layers",
+        "RAE_n_blocks",
+        "w_imgaine",
+        "nlevels",
+        "num_heads",
+        "attn_dropout_l",
+        "attn_dropout_a",
+        "attn_dropout_v",
+        "attn_dropout_mem",
+        "embed_dropout",
+        "output_dropout"
+      ],
+      "max_epoch": [30, 40, 50],
+      "batch_size": [32, 64],
+      "lr": [5e-5, 1e-4, 5e-4, 1e-3, 2e-3, 5e-3],
+      "lr_lm": [1e-6, 5e-6, 1e-5, 2e-5, 3e-5, 4e-5, 5e-5],
+      "weight_decay": [1e-1, 1e-2, 1e-3, 1e-4, 1e-5],
+      "grad_clip": [1.0, 5.0, 10.0],
+      "common_dim": [16, 32, 64, 128, 256],
+      "IB_inter_dim": [16, 32, 64, 128, 256],
+      "IB_btnk_dim": [16, 32, 64, 128, 256],
+      "p_eta": [2, 4, 8, 16, 32],
+      "RAE_layers": [ 
+        [256, 128, 64],
+        [128, 64, 32],
+        [64, 32, 16],
+        [32, 16, 8]
+      ],
+      "RAE_n_blocks": [2, 3, 4],
+      "w_imgaine": [1.0, 5.0, 10.0],
+      "nlevels": [2, 4, 6, 8],
+      "num_heads": [2, 4, 8],
+      "attn_dropout_l": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5],
+      "attn_dropout_a": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5],
+      "attn_dropout_v": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5],
+      "attn_dropout_mem": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5],
+      "embed_dropout": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5],
+      "output_dropout": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
+    }
+  }
+}

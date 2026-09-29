@@ -1,0 +1,117 @@
+{
+  "datasetCommonParams": {
+    "dataset_root_dir": "AffectiveComputing/CyIN_datasets/processed_data_imagebind/",
+    "iemocap6": {
+      "unaligned": {
+        "feature_path": "IEMOCAP6_raw_vary_length_allcontext.pkl",
+        "video_path": "IEMOCAP_lmdb",
+        "annotate_path": "IEMOCAP6_annotate.json",
+        "seq_lens": [50, 69, 138],
+        "feature_dims": [768, 1024, 1024],
+        "train_samples": 5228,
+        "num_classes": 6,
+        "num_speakers": 2,
+        "language": "en",
+        "KeyEval": "WeightedF1"
+      }
+    },
+    "meld": {
+      "unaligned": {
+        "feature_path": "MELD_raw_vary_length_allcontext.pkl",
+        "video_path": "MELD_lmdb",
+        "annotate_path": "MELD_annotate.json",
+        "seq_lens": [50, 83, 249],
+        "feature_dims": [768, 1024, 1024],
+        "train_samples": 9765,
+        "num_classes": 7,
+        "num_speakers": 7,
+        "language": "en",
+        "KeyEval": "WeightedF1"
+      }
+    }
+  },
+  "cyin": {
+    "commonParams": {
+      "need_data_aligned": false,
+      "need_model_aligned": false,
+      "need_normalized": false,
+      "grad_accum_epoch": 1,
+      
+      "miss_protocol": "random",
+      "fix": {
+        "modal_type": [0,1,2]
+      },
+      "random":{
+        "miss_rate": 0.7,
+        "miss_prob": false
+      },
+
+      "transformers": "sbert",
+      "pretrained": "paraphrase-distilroberta-base-v1" 
+    },
+    "datasetParams": {
+      "iemocap6": {
+        "stage_divide": 0.3,
+        "max_text_length": 512,
+        "batch_size": 128,
+        "lr": 1e-4,
+        "lr_lm": 5e-6,
+        "weight_decay": 1e-3,
+        "grad_clip": 1.0,
+        "max_epoch": 50,
+
+        "common_dim": 64,
+        "IB_inter_dim": 256,
+        "IB_btnk_dim": 128,
+        "p_eta": 4,
+
+        "RAE_layers": [128,64,32],
+        "RAE_n_blocks": 8,
+        "w_imgaine": 10,
+
+        "conv1d_kernel_size": 3,
+        "padding": 0,
+        "nlevels": 2,
+        "num_heads": 4,
+        "attn_dropout_l": 0.5,
+        "attn_dropout_a": 0.0,
+        "attn_dropout_v": 0.2,
+        "attn_dropout_mem": 0.3,
+        "embed_dropout": 0.0,
+        "output_dropout": 0.2,
+        "attn_mask": true
+      },
+      "meld": {
+        "stage_divide": 0.2,
+        "max_text_length": 256,
+        "batch_size": 128,
+        "lr": 5e-4,
+        "lr_lm": 3e-5,
+        "weight_decay": 1e-4,
+        "grad_clip": 10.0,
+        "max_epoch": 40,
+
+        "common_dim": 32,
+        "IB_inter_dim": 64,
+        "IB_btnk_dim": 32,
+        "p_eta": 4,
+
+        "RAE_layers": [128,64,32],
+        "RAE_n_blocks": 2,
+        "w_imgaine": 5,
+
+        "conv1d_kernel_size": 3,
+        "padding": 0,
+        "nlevels": 4,
+        "num_heads": 8,
+        "attn_dropout_l": 0.1,
+        "attn_dropout_a": 0.2,
+        "attn_dropout_v": 0.4,
+        "attn_dropout_mem": 0.3,
+        "embed_dropout": 0.0,
+        "output_dropout": 0.2,
+        "attn_mask": true
+      }
+    }
+  }
+}

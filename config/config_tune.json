@@ -1,0 +1,133 @@
+{
+  "datasetCommonParams": {
+    "dataset_root_dir": "AffectiveComputing/CyIN_datasets/processed_data_imagebind/",
+    "mosi": {
+      "unaligned": {
+        "feature_path": "MOSI_raw_vary_length.pkl",
+        "video_path": "MOSI_lmdb",
+        "annotate_path": "MOSI_annotate.json",
+        "seq_lens": [50, 105, 315],
+        "feature_dims": [768, 1024, 1024],
+        "train_samples": 1284,
+        "num_classes": 1,
+        "num_speakers": 1,
+        "language": "en",
+        "KeyEval": "Loss"
+      }
+    },
+    "mosei": {
+      "unaligned": {
+        "feature_path": "MOSEI_raw_vary_length.pkl",
+        "video_path": "MOSEI_lmdb",
+        "annotate_path": "MOSEI_annotate.json",
+        "seq_lens": [50, 217, 651],
+        "feature_dims": [768, 1024, 1024],
+        "train_samples": 16326,
+        "num_classes": 1,
+        "num_speakers": 1,
+        "language": "en",
+        "KeyEval": "Loss"
+      }
+    }
+  },
+  "cyin": {
+    "commonParams": {
+      "need_data_aligned": false,
+      "need_model_aligned": false,
+      "need_normalized": false,
+      "grad_accum_epoch": 1,
+      "max_epoch": 30,
+      "stage_divide": 0.2,
+      
+      "miss_protocol": "random",
+      "fix": {
+        "modal_type": [0,1,2]
+      },
+      "random":{
+        "miss_rate": 0.7,
+        "miss_prob": false
+      },
+
+      "max_text_length": 128,
+      "transformers": "bert",
+      "pretrained": "bert-base-uncased",
+
+      "conv1d_kernel_size": 3,
+      "padding": 0,
+      "attn_mask": true
+    },
+    "debugParams": {
+      "d_paras": [
+        "batch_size",
+        "lr",
+        "lr_lm",
+        "weight_decay",
+        "grad_clip",
+        "common_dim",
+        "IB_inter_dim",
+        "IB_btnk_dim",
+        "p_eta",
+        "RAE_layers",
+        "RAE_n_blocks",
+        "w_imgaine",
+        "nlevels",
+        "num_heads",
+        "attn_dropout_l",
+        "attn_dropout_a",
+        "attn_dropout_v",
+        "attn_dropout_mem",
+        "embed_dropout",
+        "output_dropout"
+      ],
+      "batch_size": [64, 128],
+      "lr": [1e-4, 5e-4, 1e-3, 2e-3, 5e-3],
+      "lr_lm": [1e-5, 2e-5, 3e-5, 4e-5, 5e-5],
+      "weight_decay": [1e-1, 1e-2, 1e-3, 1e-4, 1e-5],
+      "grad_clip": [1.0, 5.0, 10.0],
+      "common_dim": [16, 32, 64, 128, 256],
+      "IB_inter_dim": [16, 32, 64, 128, 256],
+      "IB_btnk_dim": [16, 32, 64, 128, 256],
+      "p_eta": [2, 4, 8, 16, 32],
+      "RAE_layers": [ 
+        [256, 128, 64],
+        [128, 64, 32],
+        [64, 32, 16],
+        [32, 16, 8]
+      ],
+      "RAE_n_blocks": [2, 3, 4],
+      "w_imgaine": [1.0, 5.0, 10.0],
+      "nlevels": [2, 4, 6, 8],
+      "num_heads": [2, 4, 8],
+      "attn_dropout_l": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5],
+      "attn_dropout_a": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5],
+      "attn_dropout_v": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5],
+      "attn_dropout_mem": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5],
+      "embed_dropout": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5],
+      "output_dropout": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
+    }
+  },
+
+  "dcca": {
+    "commonParams": {
+      "need_data_aligned": false,
+      "need_model_aligned": false,
+      "need_normalized": false
+    },
+    "debugParams": {
+      "d_paras": [
+        "batch_size",
+        "n_components",
+        "r1",
+        "r2",
+        "dim_cca",
+        "svm_C"
+      ],
+      "hidden_dims": [
+        [128, 16, 128],
+        [64, 16, 64],
+        [128, 32, 128],
+        [64, 32, 64]
+      ]
+    }
+  }
+}

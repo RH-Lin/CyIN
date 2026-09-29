@@ -1,0 +1,117 @@
+{
+  "datasetCommonParams": {
+    "dataset_root_dir": "AffectiveComputing/CyIN_datasets/processed_data_imagebind/",
+    "mosi": {
+      "unaligned": {
+        "feature_path": "MOSI_raw_vary_length.pkl",
+        "video_path": "MOSI_lmdb",
+        "annotate_path": "MOSI_annotate.json",
+        "seq_lens": [50, 105, 315],
+        "feature_dims": [768, 1024, 1024],
+        "train_samples": 1284,
+        "num_classes": 1,
+        "num_speakers": 1,
+        "language": "en",
+        "KeyEval": "Loss"
+      }
+    },
+    "mosei": {
+      "unaligned": {
+        "feature_path": "MOSEI_raw_vary_length.pkl",
+        "video_path": "MOSEI_lmdb",
+        "annotate_path": "MOSEI_annotate.json",
+        "seq_lens": [50, 217, 651],
+        "feature_dims": [768, 1024, 1024],
+        "train_samples": 16326,
+        "num_classes": 1,
+        "num_speakers": 1,
+        "language": "en",
+        "KeyEval": "Loss"
+      }
+    }
+  },
+  "cyin": {
+    "commonParams": {
+      "need_data_aligned": false,
+      "need_model_aligned": false,
+      "need_normalized": false,
+      "grad_accum_epoch": 1,
+
+      "miss_protocol": "random",
+      "fix": {
+        "modal_type": [0,1,2]
+      },
+      "random":{
+        "miss_rate": 0.7,
+        "miss_prob": false
+      },
+
+      "max_text_length": 128,
+      "transformers": "bert",
+      "pretrained": "bert-base-uncased"
+    },
+    "datasetParams": {
+      "mosi": {
+        "stage_divide": 0.1,
+        "batch_size": 128,
+        "lr": 5e-4,
+        "lr_lm": 4e-5,
+        "weight_decay": 1e-3,
+        "grad_clip": 5.0,
+        "max_epoch": 30,
+
+        "common_dim": 256,
+        "IB_inter_dim": 256,
+        "IB_btnk_dim": 128,
+        "p_eta": 16,
+
+        "RAE_layers": [64,32,16],
+        "RAE_n_blocks": 8,
+        "w_imgaine": 10,
+
+        "conv1d_kernel_size": 3,
+        "padding": 0,
+        "nlevels": 2,
+        "num_heads": 8,
+        "attn_dropout_l": 0.1,
+        "attn_dropout_a": 0.3,
+        "attn_dropout_v": 0.0,
+        "attn_dropout_mem": 0.4,
+        "embed_dropout": 0.0,
+        "output_dropout": 0.3,
+        "attn_mask": true
+      },
+    "mosei": {
+        "stage_divide": 0.3,
+        "batch_size": 128,
+        "lr": 5e-4,
+        "lr_lm": 1e-5,
+        "weight_decay": 1e-5,
+        "grad_clip": 1.0,
+        "max_epoch": 30,
+
+        "common_dim": 16,
+        "IB_inter_dim": 16,
+        "IB_btnk_dim": 256,
+        "p_eta": 32,
+
+        "RAE_layers": [128,64,32],
+        "RAE_n_blocks": 4,
+        "w_imgaine": 5,
+
+        "conv1d_kernel_size": 3,
+        "padding": 0,
+        "nlevels": 8,
+        "num_heads": 2,
+        "attn_dropout_l": 0.1,
+        "attn_dropout_a": 0.0,
+        "attn_dropout_v": 0.3,
+        "attn_dropout_mem": 0.2,
+        "embed_dropout": 0.5,
+        "output_dropout": 0.5,
+        "attn_mask": true
+      }
+    }
+  }
+
+}
