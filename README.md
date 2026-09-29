@@ -1,4 +1,4 @@
-# [NeurIPS 2025] CyIN
+# CyIN
 
 > **Official Pytorch Implementation of "CyIN: Cyclic Informative Latent Space for Bridging Complete and Incomplete Multimodal Learning"**
 
@@ -13,7 +13,7 @@ conda activate cyin
 pip install -r requirements.txt
 ```
 
-Prepare the required **datasets, checkpoints, and configuration files** according to your task.
+Prepare the required **datasets and configuration files**.
 
 ## 🔥 Train & Eval
 
